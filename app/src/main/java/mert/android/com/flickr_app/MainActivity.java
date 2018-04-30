@@ -1,9 +1,15 @@
 package mert.android.com.flickr_app;
 
+
+import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.widget.TextView;
 
 import java.io.IOException;
 
@@ -29,22 +35,24 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main);
         FlickrClient client = FlickrClient.retrofit.create(FlickrClient.class);
         client.favoritesList(API_KEY, extras).enqueue(new Callback<Re>() {
-                                                                               @Override
-                                                                               public void onResponse(Call<Re> call, retrofit2.Response<Re> response) {
-                                                                                   System.out.println(response.body().getPhotos().getPhoto().get(0).getId());
-                                                                                   newItem.setId(response.body().getPhotos().getPhoto().get(0).getId());
-                                                                                   binding.setNewItem(newItem);
-                                                                                   Log.i("info", "onResponse: client Connected");
-                                                                               }
+            @Override
+            public void onResponse(Call<Re> call, retrofit2.Response<Re> response) {
+                System.out.println(response.body().getPhotos().getPhoto().get(0).getId());
+                newItem.setId(response.body().getPhotos().getPhoto().get(0).getId());
+                binding.setNewItem(newItem);
+                Log.i("info", "onResponse: client Connected");
+            }
 
-                                                                               @Override
-                                                                               public void onFailure(Call<Re> call, Throwable t) {
-                                                                                   Log.e("error", "FavoritesListMethodFailed", new IOException());
-                                                                               }
-                                                                           }
-
-
-        );
+            @Override
+            public void onFailure(Call<Re> call, Throwable t) {
+                Log.e("error", "FavoritesListMethodFailed", new IOException());
+            }
+        });
+        InterestingListFragment interestingListFragment = new InterestingListFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fr_interestingnessList,interestingListFragment);
+        fragmentTransaction.commit();
 
     }
 }
