@@ -28,12 +28,6 @@ public class InterestingListFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
 
 
     @Override
@@ -44,6 +38,7 @@ public class InterestingListFragment extends Fragment {
         mRecyclerView.hasFixedSize();
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        //Activity recycleronclicklistener olarak cast edince onun implementasyonunu alıyor
         mAdapter = new RecyclerViewAdapter((Photos) getArguments().getParcelable("Photos_response"),(recyclerOnClickListener)getActivity());
         mRecyclerView.setAdapter(mAdapter);
 

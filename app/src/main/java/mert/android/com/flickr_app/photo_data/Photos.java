@@ -49,7 +49,7 @@ public class Photos implements Parcelable{
 	public int describeContents() {
 		return Integer.parseInt(total);
 	}
-
+	//TODO(2) Parcele yazarken sadece photo list yazılıyor düzelt
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeList(getPhoto());

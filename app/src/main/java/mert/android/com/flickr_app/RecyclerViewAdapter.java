@@ -21,9 +21,11 @@ import mert.android.com.flickr_app.photo_data.Photos;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     Photos mDataset;
     recyclerOnClickListener listener;
+    //onclicklistener interface oluştur
     public  interface  recyclerOnClickListener{
         void itemClicked(PhotoItem clickedItem);
     }
+    //veri almayı vermeyi fragment idare edecegi için listeneri oradan al
     public RecyclerViewAdapter(Photos mDataset,recyclerOnClickListener listener) {
         this.mDataset = mDataset;
         this.listener = listener;
@@ -38,9 +40,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //View içini doldur
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        //TODO(1) Daha iyi nasıl yapılabilir?
         ((TextView)holder.mLinearLayout.getChildAt(1)).setText(mDataset.getPhoto().get(position).getId());
         ((TextView)holder.mLinearLayout.getChildAt(2)).setText(mDataset.getPhoto().get(position).getOwner());
-        ((TextView)holder.mLinearLayout.getChildAt(3)).setText(mDataset.getPhoto().get(position).getDescription().getContent());
+        ((TextView)holder.mLinearLayout.getChildAt(3)).setText(mDataset.getPhoto().get(position).getTitle());
         holder.mLinearLayout.getChildAt(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,12 +1,15 @@
 package mert.android.com.flickr_app.photo_data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import javax.annotation.Generated;
 import com.squareup.moshi.Json;
 
 import mert.android.com.flickr_app.photo_data.Description;
 
 @Generated("com.robohorse.robopojogenerator")
-public class PhotoItem{
+public class PhotoItem implements Parcelable{
 
 	@Json(name = "owner")
 	private String owner;
@@ -116,5 +119,33 @@ public class PhotoItem{
 
 	public void setIsfamily(int isfamily) {
 		this.isfamily = isfamily;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+			String data[] = {title,owner,description.getContent()};
+			dest.writeStringArray(data);
+	}
+	public static final Parcelable.Creator<PhotoItem> CREATOR = new Parcelable.Creator<PhotoItem>() {
+		public PhotoItem createFromParcel(Parcel in) {
+			return new PhotoItem(in);
+		}
+
+		public PhotoItem[] newArray(int size) {
+			return new PhotoItem[size];
+		}
+	};
+	public PhotoItem(Parcel in){
+		//TODO(4) şuan sadece işe yaran kısımlar parcel olarak yazılıp okunuyor
+		String[] data = new String[3];
+		in.readStringArray(data);
+		this.title = data[0];
+		this.owner = data[1];
+		this.description.setContent(data[2]);
 	}
 }
