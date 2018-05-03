@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 
 import java.io.IOException;
+import java.util.function.ToDoubleBiFunction;
 
 import mert.android.com.flickr_app.databinding.ActivityMainBinding;
 import mert.android.com.flickr_app.photo_data.PhotoItem;
@@ -25,12 +26,14 @@ import retrofit2.Callback;
 public class MainActivity extends AppCompatActivity implements  RecyclerViewAdapter.recyclerOnClickListener,ItemDetailsFragment.detailsFragmentDetailSetter{
     private String API_KEY = "1b3d11d7d5c5952227c16737d6d97540";
     private String extras = "description";
+    // TODO: 3.05.2018 Bunlari da bir asagidaki todo da belirledigim classin icinde tanimlayabilirsin.
     Bundle bundle = new Bundle();
     FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // TODO: 3.05.2018 Retrofit objesini baska bir class'da olusturup oradan ulasman gerekiyor. Bu activity'nin lifecycle'i her yenilendiginde gereksiz yere objec olusturmus olacaksin.
         FlickrClient client = FlickrClient.retrofit.create(FlickrClient.class);
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         client.favoritesList(API_KEY, extras).enqueue(new Callback<Re>() {
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewAdap
         });
         super.onCreate(savedInstanceState);
         //TODO(3) Binding şuan için yok fragmentleri tamamladıktan sonra ekle
+        //TODO(3-CEVAP) Main Activityde sadece fragmentlarin gorunumunu saglayacak frame layout'a ihtiyacin var. DataBinding'de tanimli olan PhotoItem'i silebilirsin.
         final ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         ItemDetailsFragment itemDetailsFragment = new ItemDetailsFragment();
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewAdap
             setDetails(clickedItem);
     }
     //interface override
+    // TODO: 3.05.2018 Bunlar detail fragmentin viewlari. Activity'nin bunlara ulasmamasi gerekiyor. Burada daha farkli bir yapi kurmamiz lazim. Ben gosteririm sana.
     @Override
     public void setDetails(PhotoItem clickedItem) {
 

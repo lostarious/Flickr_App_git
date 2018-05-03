@@ -6,12 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 import mert.android.com.flickr_app.photo_data.PhotoItem;
 import mert.android.com.flickr_app.photo_data.Photos;
@@ -44,18 +41,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         //TODO(1) Daha iyi nasıl yapılabilir?
-        PhotoItem photoItem = mDataset.getPhoto().get(position);
-        //Picasso implementasyonu
-        Picasso.get().load(sourceUrlConstructor(
-                Integer.toString(photoItem.getFarm()),
-                photoItem.getServer(),
-                photoItem.getId(),
-                photoItem.getSecret(),
-                "m"
-        )).into((ImageView)holder.mLinearLayout.getChildAt(0));
-        //((TextView)holder.mLinearLayout.getChildAt(1)).setText(photoItem.getId());
-       // ((TextView)holder.mLinearLayout.getChildAt(2)).setText(photoItem.getOwner());
-       // ((TextView)holder.mLinearLayout.getChildAt(3)).setText(photoItem.getTitle());
+        //TODO(1-CEVAP)Oncelikle elinde view holder objesi var orada bu isi yapman gerekiyor. Oraya gectikten sonra ise; ilk yontem klasik olan, findViewById üzerinden viewlari tanimlayip, islem yapacaksin. 2. yontem ise DataBinding ile interesting_list_item'in icine PhotoItem'i variable olarak tanimlayip burada sadece binding.setPhoto(...) yapacaksin
+        ((TextView)holder.mLinearLayout.getChildAt(2)).setText(mDataset.getPhoto().get(position).getOwner());
+        ((TextView)holder.mLinearLayout.getChildAt(3)).setText(mDataset.getPhoto().get(position).getTitle());
+        ((TextView)holder.mLinearLayout.getChildAt(1)).setText(mDataset.getPhoto().get(position).getId());
         holder.mLinearLayout.getChildAt(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return mDataset.getPhoto().size();
+        return mDataset.getPerpage();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -76,22 +65,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mLinearLayout = (LinearLayout) v;
 
         }
-    }
-    //Picasso load için url constructor
-    private String sourceUrlConstructor(String farm_id, String server_id, String id, String secret, String size){
-        StringBuilder builder = new StringBuilder();
-        builder.append("https://farm")
-                .append(farm_id)
-                .append(".staticflickr.com/")
-                .append(server_id)
-                .append("/")
-                .append(id)
-                .append("_")
-                .append(secret)
-                .append("_")
-                .append(size)
-                .append(".jpg");
-        return builder.toString();
     }
 
 
