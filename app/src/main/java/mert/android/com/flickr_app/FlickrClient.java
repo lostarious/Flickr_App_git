@@ -25,5 +25,4 @@ public interface FlickrClient {
 
                                 @Query("api_key") String api_key,
                                @Query("extras") String extras);
-
 }
