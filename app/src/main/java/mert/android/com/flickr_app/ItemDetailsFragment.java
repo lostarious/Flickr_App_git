@@ -17,6 +17,8 @@ import mert.android.com.flickr_app.photo_data.PhotoItem;
  * All rights reserved.
  */
 public class ItemDetailsFragment extends Fragment{
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

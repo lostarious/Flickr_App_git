@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewAdap
         });
         super.onCreate(savedInstanceState);
         //TODO(3) Binding şuan için yok fragmentleri tamamladıktan sonra ekle
-        //TODO(3-CEVAP) Main Activityde sadece fragmentlarin gorunumunu saglayacak frame layout'a ihtiyacin var. DataBinding'de tanimli olan PhotoItem'i silebilirsin.
+        //TODO(3-CEVAP) Main Activityde sadece fragmentlarin gorunumunu saglayacak frame lgitayout'a ihtiyacin var. DataBinding'de tanimli olan PhotoItem'i silebilirsin.
         final ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         ItemDetailsFragment itemDetailsFragment = new ItemDetailsFragment();
@@ -84,6 +84,11 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewAdap
             owner.setText(clickedItem.getOwner());
             TextView description = findViewById(R.id.tv_item_details_description);
             description.setText(clickedItem.getDescription().getContent());
+
+    }
+
+    public void replaceFragment() {
+
 
     }
 }

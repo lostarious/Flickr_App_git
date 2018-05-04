@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import mert.android.com.flickr_app.RecyclerViewAdapter.recyclerOnClickListener;
 
+import mert.android.com.flickr_app.databinding.FragmentInterestingListBinding;
+import mert.android.com.flickr_app.photo_data.PhotoItem;
 import mert.android.com.flickr_app.photo_data.Photos;
 
 
@@ -21,11 +23,27 @@ import mert.android.com.flickr_app.photo_data.Photos;
  * All rights reserved.
  */
 
-public class InterestingListFragment extends Fragment {
+public class InterestingListFragment extends Fragment implements  RecyclerViewAdapter.recyclerOnClickListener{
 
-    private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
+    private MainActivity mainActivity;
+    private FragmentInterestingListBinding binding;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainActivity = (MainActivity) context;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding =  FragmentInterestingListBinding.inflate(inflater, container, false);
+
+        return binding.getRoot();
+    }
+    //Container activitynin implemente etmesi için bir interface
 
 
 
@@ -34,24 +52,19 @@ public class InterestingListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mRecyclerView = getView().findViewById(R.id.rv_interestingnessList);
-        mRecyclerView.hasFixedSize();
+
+        binding.rvInterestingnessList.hasFixedSize();
         mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        binding.rvInterestingnessList.setLayoutManager(mLayoutManager);
         //Activity recycleronclicklistener olarak cast edince onun implementasyonunu alıyor
         mAdapter = new RecyclerViewAdapter((Photos) getArguments().getParcelable("Photos_response"),(recyclerOnClickListener)getActivity());
-        mRecyclerView.setAdapter(mAdapter);
+        binding.rvInterestingnessList.setAdapter(mAdapter);
 
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_interesting_list,container,false);
+    public void itemClicked(PhotoItem clickedItem) {
+        mainActivity.replaceFragment(ItemDetailsFragment.new);
     }
-    //Container activitynin implemente etmesi için bir interface
-
-
-
 }
