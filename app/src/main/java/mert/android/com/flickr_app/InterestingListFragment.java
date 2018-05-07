@@ -65,6 +65,6 @@ public class InterestingListFragment extends Fragment implements  RecyclerViewAd
 
     @Override
     public void itemClicked(PhotoItem clickedItem) {
-        mainActivity.replaceFragment(ItemDetailsFragment.new);
+        //mainActivity.replaceFragment(ItemDetailsFragment.new);
     }
 }
