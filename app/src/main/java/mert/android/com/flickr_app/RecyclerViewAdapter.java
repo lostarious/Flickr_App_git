@@ -1,5 +1,6 @@
 package mert.android.com.flickr_app;
 
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import mert.android.com.flickr_app.databinding.InterestingListItemBinding;
 import mert.android.com.flickr_app.photo_data.PhotoItem;
 import mert.android.com.flickr_app.photo_data.Photos;
 
@@ -24,6 +26,7 @@ import mert.android.com.flickr_app.photo_data.Photos;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     Photos mDataset;
     recyclerOnClickListener listener;
+    ;
     //onclicklistener interface oluştur
     public  interface  recyclerOnClickListener{
         void itemClicked(PhotoItem clickedItem);
@@ -36,30 +39,44 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //Yeni view oluştur
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.interesting_list_item,parent,false);
-        ViewHolder vh = new ViewHolder((LinearLayout)v);
-        return vh;
+        //contextten inflateri al
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        //binding objesi oluştur
+        InterestingListItemBinding binding = DataBindingUtil.inflate(layoutInflater,R.layout.interesting_list_item,parent,false);
+        //bnding objesini viewholderin olarak return et
+        return new ViewHolder(binding);
     }
     //View içini doldur
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        //TODO(1) Daha iyi nasıl yapılabilir?
-        PhotoItem photoItem = mDataset.getPhoto().get(position);
+        holder.mBinding.setDisplayedItem(mDataset.getPhoto().get(position));
         //Picasso implementasyonu
-        Picasso.get().load(sourceUrlConstructor(
-                Integer.toString(photoItem.getFarm()),
-                photoItem.getServer(),
-                photoItem.getId(),
-                photoItem.getSecret(),
-                "m"
-        )).into((ImageView)holder.mLinearLayout.getChildAt(0));
+        ///imageview run edilmeden önce match_parent ile getWidth ve getHeight kullanamayacağımız için picassoyu böyle implemente et
+        holder.mBinding.ivPlaceHolder.post(new Runnable() {
+            @Override
+            public void run() {
+                Picasso.get().load(sourceUrlConstructor(
+                        Integer.toString(holder.mBinding.getDisplayedItem().getFarm()),
+                        holder.mBinding.getDisplayedItem().getServer(),
+                        holder.mBinding.getDisplayedItem().getId(),
+                        holder.mBinding.getDisplayedItem().getSecret(),
+                        "m"
+                )).resize(holder.mBinding.ivPlaceHolder.getWidth(),holder.mBinding.ivPlaceHolder.getHeight()).into(holder.mBinding.ivPlaceHolder);
+            }
+        });
 
-        //TODO(1-CEVAP)Oncelikle elinde view holder objesi var orada bu isi yapman gerekiyor. Oraya gectikten sonra ise; ilk yontem klasik olan, findViewById üzerinden viewlari tanimlayip, islem yapacaksin. 2. yontem ise DataBinding ile interesting_list_item'in icine PhotoItem'i variable olarak tanimlayip burada sadece binding.setPhoto(...) yapacaksin
-
-        holder.mLinearLayout.getChildAt(0).setOnClickListener(new View.OnClickListener() {
+        //DONE
+        //Oncelikle elinde view holder objesi var
+        // orada bu isi yapman gerekiyor.
+        // Oraya gectikten sonra ise; ilk yontem klasik olan,
+        // findViewById üzerinden viewlari tanimlayip, islem yapacaksin.
+        // 2. yontem ise DataBinding ile interesting_list_item'in icine
+        // PhotoItem'i variable olarak tanimlayip burada sadece binding.setPhoto(...) yapacaksin
+        //TODO(10) Onclicklisteneri databinding kısmına nasıl gömebilirim?
+        holder.mBinding.ivPlaceHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.itemClicked(mDataset.getPhoto().get(position));
+                listener.itemClicked(holder.mBinding.getDisplayedItem());
             }
         });
     }
@@ -70,14 +87,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public final TextView tvContent;
-        LinearLayout mLinearLayout;
-
-        public ViewHolder(ViewGroup v){
-            super(v);
-            mLinearLayout = (LinearLayout) v;
-            tvContent = v.findViewById(R.id.tv_list_item_id);
-
+        //her VH nin kendi bindingi olacağı için member
+        InterestingListItemBinding mBinding;
+        public ViewHolder(InterestingListItemBinding binding){
+            super(binding.getRoot());
+            mBinding = binding;
         }
     }
     //Picasso load için url constructor
