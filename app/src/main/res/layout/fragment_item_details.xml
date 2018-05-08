@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="selectedItem"
+            type="mert.android.com.flickr_app.photo_data.PhotoItem"/>
+    </data>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,22 +14,24 @@
     <TextView
         android:id="@+id/tv_item_details_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@{selectedItem.title}"/>
 
     <TextView
         android:id="@+id/tv_item_details_owner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="93dp" />
+        android:text="@{selectedItem.owner}"
+         />
 
     <TextView
         android:id="@+id/tv_item_details_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="66dp" />
+        android:text="@{selectedItem.description.getContent()}"
+         />
 
 
 
 </LinearLayout>
+</layout>

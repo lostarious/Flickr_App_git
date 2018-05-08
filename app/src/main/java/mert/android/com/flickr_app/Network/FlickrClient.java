@@ -1,4 +1,4 @@
-package mert.android.com.flickr_app;
+package mert.android.com.flickr_app.Network;
 
 import mert.android.com.flickr_app.photo_data.Photos;
 import mert.android.com.flickr_app.photo_data.Re;
@@ -15,10 +15,7 @@ import retrofit2.http.Query;
  */
 
 public interface FlickrClient {
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.flickr.com/services/rest/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+
 
     @GET("?method=flickr.interestingness.getList&format=json&nojsoncallback=1")
     Call<Re> favoritesList(

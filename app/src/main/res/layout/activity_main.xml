@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="mert.android.com.flickr_app.MainActivity">
     <data>
-        <variable name="newItem" type="mert.android.com.flickr_app.photo_data.PhotoItem"/>
+
 
     </data>
 
