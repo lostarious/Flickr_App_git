@@ -1,16 +1,20 @@
 package mert.android.com.flickr_app.photo_data;
 
 import javax.annotation.Generated;
-import com.squareup.moshi.Json;
+import com.google.gson.annotations.SerializedName;
 
 @Generated("com.robohorse.robopojogenerator")
 public class Re{
 
-	@Json(name = "stat")
+	@SerializedName("stat")
 	private String stat;
 
-	@Json(name = "photos")
+	@SerializedName("photos")
 	private Photos photos;
+
+	public String getStat() {
+		return stat;
+	}
 
 	public Photos getPhotos() {
 		return photos;

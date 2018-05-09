@@ -5,31 +5,31 @@ import android.os.Parcelable;
 
 import java.util.List;
 import javax.annotation.Generated;
-import com.squareup.moshi.Json;
+import com.google.gson.annotations.SerializedName;
 
 @Generated("com.robohorse.robopojogenerator")
 public class Photos implements Parcelable{
 
-	@Json(name = "perpage")
+	@SerializedName("perpage")
 	private int perpage;
 
-	@Json(name = "total")
-	private String total;
+	@SerializedName("total")
+	private int total;
 
-	@Json(name = "pages")
+	@SerializedName("pages")
 	private int pages;
 
-	@Json(name = "photo")
+	@SerializedName("photo")
 	private List<PhotoItem> photo;
 
-	@Json(name = "page")
+	@SerializedName("page")
 	private int page;
 
 	public int getPerpage() {
 		return perpage;
 	}
 
-	public String getTotal() {
+	public int getTotal() {
 		return total;
 	}
 
@@ -44,10 +44,9 @@ public class Photos implements Parcelable{
 	public int getPage() {
 		return page;
 	}
-
 	@Override
 	public int describeContents() {
-		return Integer.parseInt(total);
+		return total;
 	}
 	//TODO(2) Parcele yazarken sadece photo list yazılıyor düzelt
 	@Override
