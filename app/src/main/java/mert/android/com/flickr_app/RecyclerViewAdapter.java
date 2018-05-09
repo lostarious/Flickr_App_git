@@ -2,15 +2,9 @@ package mert.android.com.flickr_app;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -27,15 +21,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Photos mDataset;
     recyclerOnClickListener listener;
     ;
-    //onclicklistener interface oluştur
-    public  interface  recyclerOnClickListener{
-        void itemClicked(PhotoItem clickedItem);
-    }
     //veri almayı vermeyi fragment idare edecegi için listeneri oradan al
     public RecyclerViewAdapter(Photos mDataset,recyclerOnClickListener listener) {
         this.mDataset = mDataset;
         this.listener = listener;
     }
+
     //Yeni view oluştur
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,6 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //bnding objesini viewholderin olarak return et
         return new ViewHolder(binding);
     }
+
     //View içini doldur
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -86,14 +78,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mDataset.getPerpage();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        //her VH nin kendi bindingi olacağı için member
-        InterestingListItemBinding mBinding;
-        public ViewHolder(InterestingListItemBinding binding){
-            super(binding.getRoot());
-            mBinding = binding;
-        }
-    }
     //Picasso load için url constructor
     private String sourceUrlConstructor(String farm_id, String server_id, String id, String secret, String size){
         StringBuilder builder = new StringBuilder();
@@ -109,6 +93,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .append(size)
                 .append(".jpg");
         return builder.toString();
+    }
+
+    //onclicklistener interface oluştur
+    public  interface  recyclerOnClickListener{
+        void itemClicked(PhotoItem clickedItem);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        //her VH nin kendi bindingi olacağı için member
+        InterestingListItemBinding mBinding;
+        public ViewHolder(InterestingListItemBinding binding){
+            super(binding.getRoot());
+            mBinding = binding;
+        }
     }
 
 }

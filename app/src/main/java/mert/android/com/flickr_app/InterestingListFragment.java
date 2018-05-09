@@ -10,8 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import mert.android.com.flickr_app.RecyclerViewAdapter.recyclerOnClickListener;
 
+import mert.android.com.flickr_app.RecyclerViewAdapter.recyclerOnClickListener;
 import mert.android.com.flickr_app.databinding.FragmentInterestingListBinding;
 import mert.android.com.flickr_app.photo_data.PhotoItem;
 import mert.android.com.flickr_app.photo_data.Photos;
@@ -23,7 +23,7 @@ import mert.android.com.flickr_app.photo_data.Photos;
  * All rights reserved.
  */
 
-public class InterestingListFragment extends Fragment implements  RecyclerViewAdapter.recyclerOnClickListener{
+public class InterestingListFragment extends Fragment implements RecyclerViewAdapter.recyclerOnClickListener {
 
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
@@ -39,13 +39,11 @@ public class InterestingListFragment extends Fragment implements  RecyclerViewAd
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding =  FragmentInterestingListBinding.inflate(inflater, container, false);
+        binding = FragmentInterestingListBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
     }
     //Container activitynin implemente etmesi için bir interface
-
-
 
 
     @Override
@@ -57,7 +55,7 @@ public class InterestingListFragment extends Fragment implements  RecyclerViewAd
         mLayoutManager = new LinearLayoutManager(getContext());
         binding.rvInterestingnessList.setLayoutManager(mLayoutManager);
         //Activity recycleronclicklistener olarak cast edince onun implementasyonunu alıyor
-        mAdapter = new RecyclerViewAdapter((Photos) getArguments().getParcelable("Photos_response"),(recyclerOnClickListener)getActivity());
+        mAdapter = new RecyclerViewAdapter((Photos) getArguments().getParcelable("Photos_response"), (recyclerOnClickListener) getActivity());
         binding.rvInterestingnessList.setAdapter(mAdapter);
 
     }

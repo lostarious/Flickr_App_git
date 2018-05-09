@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
-    <variable
-        name="displayedItem"
-        type="mert.android.com.flickr_app.photo_data.PhotoItem" />
+
+        <variable
+            name="displayedItem"
+            type="mert.android.com.flickr_app.photo_data.PhotoItem" />
+
         <variable
             name="onClickListener"
-            type="mert.android.com.flickr_app.RecyclerViewAdapter.recyclerOnClickListener"/>
+            type="mert.android.com.flickr_app.RecyclerViewAdapter.recyclerOnClickListener" />
 
     </data>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/lv_list_item"
-    android:orientation="vertical"
-    android:layout_margin="5dp">
 
-    <ImageView
-        android:id="@+id/iv_place_holder"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lv_list_item"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_place_holder"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
 
 
-
-
-</LinearLayout>
+    </LinearLayout>
 </layout>

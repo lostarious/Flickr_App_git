@@ -1,38 +1,22 @@
 package mert.android.com.flickr_app;
 
 
-
-import android.databinding.DataBindingUtil;
-import android.provider.ContactsContract;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.widget.TextView;
 
-
-import java.io.IOException;
-
-import mert.android.com.flickr_app.Network.FlickrClient;
 import mert.android.com.flickr_app.Network.RetrofitNetwork;
-import mert.android.com.flickr_app.databinding.ActivityMainBinding;
 import mert.android.com.flickr_app.photo_data.PhotoItem;
 
-import mert.android.com.flickr_app.photo_data.Photos;
-import mert.android.com.flickr_app.photo_data.Re;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
 
-
-public class MainActivity extends AppCompatActivity implements  RecyclerViewAdapter.recyclerOnClickListener{
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.recyclerOnClickListener {
 
     // 3.05.2018 Bunlari da bir asagidaki to do da belirledigim classin icinde tanimlayabilirsin.
     ItemDetailsFragment mItemDetailsFragment;
     FragmentManager fragmentManager = getSupportFragmentManager();
     RetrofitNetwork mRetrofitNetwork = new RetrofitNetwork();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //3.05.2018 Retrofit objesini baska bir class'da olusturup oradan ulasman gerekiyor. Bu activity'nin lifecycle'i her yenilendiginde gereksiz yere objec olusturmus olacaksin.
@@ -48,16 +32,16 @@ public class MainActivity extends AppCompatActivity implements  RecyclerViewAdap
 
         mItemDetailsFragment = new ItemDetailsFragment();
         FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
-        fragmentTransaction1.add(R.id.fl_item_details,mItemDetailsFragment).commit();
+        fragmentTransaction1.add(R.id.fl_item_details, mItemDetailsFragment).commit();
     }
+
     //interface override
     @Override
     public void itemClicked(PhotoItem clickedItem) {
         //TODO: 8.05.2018 Bu kullanım yanlış mı?
-            mItemDetailsFragment.updateItemDetails(clickedItem);
+        mItemDetailsFragment.updateItemDetails(clickedItem);
     }
     // 3.05.2018 Bunlar detail fragmentin viewlari. Activity'nin bunlara ulasmamasi gerekiyor. Burada daha farkli bir yapi kurmamiz lazim. Ben gosteririm sana.
-
 
 
 }
