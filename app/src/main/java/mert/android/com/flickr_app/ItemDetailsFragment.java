@@ -18,11 +18,11 @@ import mert.android.com.flickr_app.photo_data.PhotoItem;
  */
 public class ItemDetailsFragment extends Fragment{
     FragmentItemDetailsBinding mBinding;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_item_details,container,false);
+        mBinding.setSelectedItem((PhotoItem)getArguments().get("selectedItem"));
         return mBinding.getRoot();
     }
 
@@ -32,9 +32,6 @@ public class ItemDetailsFragment extends Fragment{
 
     }
 
-    public void updateItemDetails(PhotoItem selectedItem){
-            mBinding.setSelectedItem(selectedItem);
-    }
 
 
 }

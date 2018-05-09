@@ -13,7 +13,6 @@ import mert.android.com.flickr_app.photo_data.PhotoItem;
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.recyclerOnClickListener {
 
     // 3.05.2018 Bunlari da bir asagidaki to do da belirledigim classin icinde tanimlayabilirsin.
-    ItemDetailsFragment mItemDetailsFragment;
     FragmentManager fragmentManager = getSupportFragmentManager();
     RetrofitNetwork mRetrofitNetwork = new RetrofitNetwork();
 
@@ -30,16 +29,21 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         mRetrofitNetwork.requestFavoritesList(fragmentTransaction);
         //3.05.2018 Main Activityde sadece fragmentlarin gorunumunu saglayacak frame lgitayout'a ihtiyacin var. DataBinding'de tanimli olan PhotoItem'i silebilirsin.
 
-        mItemDetailsFragment = new ItemDetailsFragment();
-        FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
-        fragmentTransaction1.add(R.id.fl_item_details, mItemDetailsFragment).commit();
+
     }
 
     //interface override
     @Override
     public void itemClicked(PhotoItem clickedItem) {
-        //TODO: 8.05.2018 Bu kullanım yanlış mı?
-        mItemDetailsFragment.updateItemDetails(clickedItem);
+        //TODO: 8.05.2018 Bu kullanım doğru mu?
+        ItemDetailsFragment newFragment = new ItemDetailsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("selectedItem",clickedItem);
+        newFragment.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fl_fragment_display,newFragment)
+                .addToBackStack("newFragment")
+                .commit();
     }
     // 3.05.2018 Bunlar detail fragmentin viewlari. Activity'nin bunlara ulasmamasi gerekiyor. Burada daha farkli bir yapi kurmamiz lazim. Ben gosteririm sana.
 

@@ -56,7 +56,7 @@ public class RetrofitNetwork{
                 mBundle.putParcelable("Photos_response",retrievedPhotos);
                 InterestingListFragment interestingListFragment = new InterestingListFragment();
                 interestingListFragment.setArguments(mBundle);
-                fragmentTransaction.add(R.id.fl_interestingness_list,interestingListFragment);
+                fragmentTransaction.add(R.id.fl_fragment_display,interestingListFragment);
                 fragmentTransaction.commit();
             }
 
