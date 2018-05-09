@@ -21,8 +21,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     Photos mDataset;
     recyclerOnClickListener listener;
     ;
+
     //veri almayı vermeyi fragment idare edecegi için listeneri oradan al
-    public RecyclerViewAdapter(Photos mDataset,recyclerOnClickListener listener) {
+    public RecyclerViewAdapter(Photos mDataset, recyclerOnClickListener listener) {
         this.mDataset = mDataset;
         this.listener = listener;
     }
@@ -33,7 +34,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //contextten inflateri al
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         //binding objesi oluştur
-        InterestingListItemBinding binding = DataBindingUtil.inflate(layoutInflater,R.layout.interesting_list_item,parent,false);
+        InterestingListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.interesting_list_item, parent, false);
         //bnding objesini viewholderin olarak return et
         return new ViewHolder(binding);
     }
@@ -53,7 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         holder.mBinding.getDisplayedItem().getId(),
                         holder.mBinding.getDisplayedItem().getSecret(),
                         "m"
-                )).resize(holder.mBinding.ivPlaceHolder.getWidth(),holder.mBinding.ivPlaceHolder.getHeight()).into(holder.mBinding.ivPlaceHolder);
+                )).resize(holder.mBinding.ivPlaceHolder.getWidth(), holder.mBinding.ivPlaceHolder.getHeight()).into(holder.mBinding.ivPlaceHolder);
             }
         });
 
@@ -79,7 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     //Picasso load için url constructor
-    private String sourceUrlConstructor(String farm_id, String server_id, String id, String secret, String size){
+    private String sourceUrlConstructor(String farm_id, String server_id, String id, String secret, String size) {
         StringBuilder builder = new StringBuilder();
         builder.append("https://farm")
                 .append(farm_id)
@@ -96,14 +97,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     //onclicklistener interface oluştur
-    public  interface  recyclerOnClickListener{
+    public interface recyclerOnClickListener {
         void itemClicked(PhotoItem clickedItem);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         //her VH nin kendi bindingi olacağı için member
         InterestingListItemBinding mBinding;
-        public ViewHolder(InterestingListItemBinding binding){
+
+        public ViewHolder(InterestingListItemBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }

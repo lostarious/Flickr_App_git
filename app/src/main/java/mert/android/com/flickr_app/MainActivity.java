@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         //TODO: 8.05.2018 Bu kullanım doğru mu?
         ItemDetailsFragment newFragment = new ItemDetailsFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("selectedItem",clickedItem);
+        bundle.putParcelable("selectedItem", clickedItem);
         newFragment.setArguments(bundle);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fl_fragment_display,newFragment)
+        fragmentTransaction.replace(R.id.fl_fragment_display, newFragment)
                 .addToBackStack("newFragment")
                 .commit();
     }

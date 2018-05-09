@@ -3,90 +3,100 @@ package mert.android.com.flickr_app.photo_data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
+import javax.annotation.Generated;
+
 @Generated("com.robohorse.robopojogenerator")
-public class PhotoItem implements Parcelable{
+public class PhotoItem implements Parcelable {
 
-	@SerializedName("owner")
-	private String owner;
+    public static final Parcelable.Creator<PhotoItem> CREATOR = new Parcelable.Creator<PhotoItem>() {
+        public PhotoItem createFromParcel(Parcel in) {
+            return new PhotoItem(in);
+        }
 
-	@SerializedName("server")
-	private String server;
+        public PhotoItem[] newArray(int size) {
+            return new PhotoItem[size];
+        }
+    };
+    @SerializedName("owner")
+    private String owner;
+    @SerializedName("server")
+    private String server;
+    @SerializedName("ispublic")
+    private int ispublic;
+    @SerializedName("isfriend")
+    private int isfriend;
+    @SerializedName("farm")
+    private int farm;
+    @SerializedName("description")
+    private Description description;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("secret")
+    private String secret;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("isfamily")
+    private int isfamily;
 
-	@SerializedName("ispublic")
-	private int ispublic;
+    public PhotoItem(Parcel in) {
+        //TODO(4) şuan sadece işe yaran kısımlar parcel olarak yazılıp okunuyor
+        String[] data = new String[3];
+        in.readStringArray(data);
+        this.title = data[0];
+        this.owner = data[1];
+        this.description.setContent(data[2]);
+    }
 
-	@SerializedName("isfriend")
-	private int isfriend;
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-	@SerializedName("farm")
-	private int farm;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        String data[] = {title, owner, description.getContent()};
+        dest.writeStringArray(data);
+    }
 
-	@SerializedName("description")
-	private Description description;
+    public String getOwner() {
+        return owner;
+    }
 
-	@SerializedName("id")
-	private String id;
+    public String getServer() {
+        return server;
+    }
 
-	@SerializedName("secret")
-	private String secret;
+    public int getIspublic() {
+        return ispublic;
+    }
 
-	@SerializedName("title")
-	private String title;
+    public int getIsfriend() {
+        return isfriend;
+    }
 
-	@SerializedName("isfamily")
-	private int isfamily;
-	@Override public int describeContents() { return 0; }
-	@Override public void writeToParcel(Parcel dest, int flags) {
-		String data[] = {title,owner,description.getContent()};
-		dest.writeStringArray(data); }
-		public static final Parcelable.Creator<PhotoItem> CREATOR = new Parcelable.Creator<PhotoItem>() {
-		public PhotoItem createFromParcel(Parcel in) { return new PhotoItem(in); }
-		public PhotoItem[] newArray(int size) { return new PhotoItem[size]; } };
-	public PhotoItem(Parcel in){
-		//TODO(4) şuan sadece işe yaran kısımlar parcel olarak yazılıp okunuyor
-		String[] data = new String[3]; in.readStringArray(data);
-		this.title = data[0]; this.owner = data[1]; this.description.setContent(data[2]); }
+    public int getFarm() {
+        return farm;
+    }
 
-	public String getOwner() {
-		return owner;
-	}
+    public Description getDescription() {
+        return description;
+    }
 
-	public String getServer() {
-		return server;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public int getIspublic() {
-		return ispublic;
-	}
+    public String getSecret() {
+        return secret;
+    }
 
-	public int getIsfriend() {
-		return isfriend;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public int getFarm() {
-		return farm;
-	}
-
-	public Description getDescription() {
-		return description;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public String getSecret() {
-		return secret;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public int getIsfamily() {
-		return isfamily;
-	}
+    public int getIsfamily() {
+        return isfamily;
+    }
 }

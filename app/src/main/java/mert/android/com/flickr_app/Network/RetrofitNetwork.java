@@ -2,8 +2,6 @@ package mert.android.com.flickr_app.Network;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
@@ -23,14 +21,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Copyright (c) 2018 YGA to present
  * All rights reserved.
  */
-public class RetrofitNetwork{
+public class RetrofitNetwork {
     private static final String API_KEY = "1b3d11d7d5c5952227c16737d6d97540";
     private static final String EXTRAS = "description";
     private static final String BASE_URL = "https://api.flickr.com/services/rest/";
     private Retrofit mRetrofit;
     private FlickrClient mClient;
     private Bundle mBundle = new Bundle();
-    public Retrofit createRetrofitInstance(){
+
+    public RetrofitNetwork() {
+        mRetrofit = createRetrofitInstance();
+        mClient = createClient(mRetrofit);
+
+    }
+
+    public Retrofit createRetrofitInstance() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -38,25 +43,21 @@ public class RetrofitNetwork{
         return retrofit;
     }
 
-    public FlickrClient createClient(Retrofit retrofit){
-            return retrofit.create(FlickrClient.class);
-            }
-    public RetrofitNetwork(){
-        mRetrofit = createRetrofitInstance();
-        mClient = createClient(mRetrofit);
-
+    public FlickrClient createClient(Retrofit retrofit) {
+        return retrofit.create(FlickrClient.class);
     }
-    public void requestFavoritesList(final FragmentTransaction fragmentTransaction){
+
+    public void requestFavoritesList(final FragmentTransaction fragmentTransaction) {
         mClient.favoritesList(API_KEY, EXTRAS).enqueue(new Callback<Re>() {
             @Override
             public void onResponse(Call<Re> call, retrofit2.Response<Re> response) {
                 System.out.println(response.body().getPhotos().getPhoto().get(0).getId());
                 Log.i("info", "onResponse: client Connected");
                 Photos retrievedPhotos = response.body().getPhotos();
-                mBundle.putParcelable("Photos_response",retrievedPhotos);
+                mBundle.putParcelable("Photos_response", retrievedPhotos);
                 InterestingListFragment interestingListFragment = new InterestingListFragment();
                 interestingListFragment.setArguments(mBundle);
-                fragmentTransaction.add(R.id.fl_fragment_display,interestingListFragment);
+                fragmentTransaction.add(R.id.fl_fragment_display, interestingListFragment);
                 fragmentTransaction.commit();
             }
 
