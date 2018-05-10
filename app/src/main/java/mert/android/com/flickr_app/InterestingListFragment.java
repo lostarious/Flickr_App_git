@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import mert.android.com.flickr_app.RecyclerViewAdapter.recyclerOnClickListener;
 import mert.android.com.flickr_app.databinding.FragmentInterestingListBinding;
-import mert.android.com.flickr_app.photo_data.PhotoItem;
 import mert.android.com.flickr_app.photo_data.Photos;
 
 
@@ -23,7 +22,7 @@ import mert.android.com.flickr_app.photo_data.Photos;
  * All rights reserved.
  */
 
-public class InterestingListFragment extends Fragment implements RecyclerViewAdapter.recyclerOnClickListener {
+public class InterestingListFragment extends Fragment {
 
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
@@ -43,8 +42,6 @@ public class InterestingListFragment extends Fragment implements RecyclerViewAda
 
         return binding.getRoot();
     }
-    //Container activitynin implemente etmesi için bir interface
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -60,9 +57,4 @@ public class InterestingListFragment extends Fragment implements RecyclerViewAda
 
     }
 
-
-    @Override
-    public void itemClicked(PhotoItem clickedItem) {
-        //mainActivity.replaceFragment(ItemDetailsFragment.new);
-    }
 }

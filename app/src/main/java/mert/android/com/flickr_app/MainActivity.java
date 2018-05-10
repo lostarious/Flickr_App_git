@@ -36,14 +36,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     @Override
     public void itemClicked(PhotoItem clickedItem) {
         //TODO: 8.05.2018 Bu kullanım doğru mu?
-        ItemDetailsFragment newFragment = new ItemDetailsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("selectedItem", clickedItem);
-        newFragment.setArguments(bundle);
+
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fl_fragment_display, newFragment)
-                .addToBackStack("newFragment")
-                .commit();
+        mRetrofitNetwork.requestUserInfo(fragmentTransaction, clickedItem);
+
     }
     // 3.05.2018 Bunlar detail fragmentin viewlari. Activity'nin bunlara ulasmamasi gerekiyor. Burada daha farkli bir yapi kurmamiz lazim. Ben gosteririm sana.
 

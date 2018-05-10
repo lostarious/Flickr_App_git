@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import mert.android.com.flickr_app.databinding.FragmentItemDetailsBinding;
 import mert.android.com.flickr_app.photo_data.PhotoItem;
+import mert.android.com.flickr_app.user_data.Profile;
 
 /**
  * Created by lostarious on 02.05.2018
@@ -23,7 +24,6 @@ public class ItemDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_item_details, container, false);
-        mBinding.setSelectedItem((PhotoItem) getArguments().get("selectedItem"));
         return mBinding.getRoot();
     }
 
@@ -36,7 +36,9 @@ public class ItemDetailsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
+        mBinding.setSelectedItem((PhotoItem) getArguments().get("selectedItem"));
+        mBinding.setUserData((Profile) getArguments().get("profile_response"));
+        mBinding.getUserData().getmDetails();
         //Floating action button listener
         mBinding.FAB.setOnClickListener(new View.OnClickListener() {
             @Override
