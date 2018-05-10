@@ -33,5 +33,18 @@ public class ItemDetailsFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        //Floating action button listener
+        mBinding.FAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //geri tuşuna basılmış gibi çalışacak
+                getFragmentManager().popBackStack();
+            }
+        });
+    }
 
 }
