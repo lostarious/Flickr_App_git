@@ -1,21 +1,9 @@
 package mert.android.com.flickr_app.network;
 
 
-import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-import android.transition.Explode;
-import android.util.Log;
-
-import java.io.IOException;
-
-import mert.android.com.flickr_app.InterestingListFragment;
-import mert.android.com.flickr_app.R;
-import mert.android.com.flickr_app.photo_data.PhotoItem;
-import mert.android.com.flickr_app.photo_data.Photos;
 import mert.android.com.flickr_app.photo_data.Re;
 import mert.android.com.flickr_app.user_data.ProfileResponse;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -28,13 +16,24 @@ public class RetrofitNetwork {
     private static final String API_KEY = "1b3d11d7d5c5952227c16737d6d97540";
     private static final String EXTRAS = "description";
     private static final String BASE_URL = "https://api.flickr.com/services/rest/";
-    private Retrofit mRetrofit;
-    private FlickrClient mClient;
-    private Bundle mBundle = new Bundle();
+    private static Retrofit mRetrofit;
+    private static FlickrClient mClient;
 
     public RetrofitNetwork() {
         mRetrofit = createRetrofitInstance();
         mClient = createClient(mRetrofit);
+
+    }
+
+    //  11.05.2018 transaction burada yapilmayacak
+    public static Call<Re> requestFavoritesList() {
+        return mClient.favoritesList(API_KEY, EXTRAS);
+    }
+
+    //  11.05.2018 sadece parametreleri gonder.
+    public static Call<ProfileResponse> requestUserInfo(String user_id) {
+
+        return mClient.userInfo(API_KEY, user_id);
 
     }
 
@@ -48,65 +47,6 @@ public class RetrofitNetwork {
 
     public FlickrClient createClient(Retrofit retrofit) {
         return retrofit.create(FlickrClient.class);
-    }
-
-
-    // TODO: 11.05.2018 transaction burada yapilmayacak
-    public void requestFavoritesList(final FragmentTransaction fragmentTransaction) {
-        mClient.favoritesList(API_KEY, EXTRAS).enqueue(new Callback<Re>() {
-            @Override
-            public void onResponse(Call<Re> call, retrofit2.Response<Re> response) {
-                mBundle = new Bundle();
-                System.out.println(response.body().getPhotos().getPhoto().get(0).getId());
-                Log.i("info", "onResponse: client Connected");
-                Photos retrievedPhotos = response.body().getPhotos();
-                mBundle.putParcelable("Photos_response", retrievedPhotos);
-                InterestingListFragment interestingListFragment = new InterestingListFragment();
-                interestingListFragment.setArguments(mBundle);
-                //Animasyon(Transition) ekle, ortak viewlerin olduğu animasyonlar farklı şekilde implemente ediliyor
-                Explode transition = new Explode();
-                transition.setDuration(100);
-                interestingListFragment.setExitTransition(transition);
-
-
-                fragmentTransaction.add(R.id.fl_fragment_display, interestingListFragment);
-                fragmentTransaction.commit();
-            }
-
-            @Override
-            public void onFailure(Call<Re> call, Throwable t) {
-                Log.e("error", "FavoritesListMethodFailed", new IOException());
-            }
-        });
-    }
-
-    // TODO: 11.05.2018 sadece parametreleri gonder.
-    public Call<ProfileResponse> requestUserInfo(final FragmentTransaction fragmentTransaction, final PhotoItem clickedItem) {
-
-        return mClient.userInfo(API_KEY, clickedItem.getId());
-
-        /*mClient.userInfo(API_KEY, clickedItem.getOwner()).enqueue(new Callback<ProfileResponse>() {
-            @Override
-            public void onResponse(Call<ProfileResponse> call, retrofit2.Response<ProfileResponse> response) {
-                Log.i("info", "onResponse: client Connected");
-                //TODO: 10.05.2018 Interesting list fragmenti profile_response bundle null dönmesin diye burada alıyorum nasıl alakası olmayan networkten çıkarırım
-                Profile retrievedProfile = response.body().getProfile();
-                retrievedProfile.setmDetails();
-                mBundle = new Bundle();
-                mBundle.putParcelable("profile_response", retrievedProfile);
-                ItemDetailsFragment newFragment = new ItemDetailsFragment();
-                mBundle.putParcelable("selectedItem", clickedItem);
-                newFragment.setArguments(mBundle);
-                fragmentTransaction.replace(R.id.fl_fragment_display, newFragment)
-                        .addToBackStack("newFragment")
-                        .commit();
-            }
-
-            @Override
-            public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                Log.e("error", "userInfoMethodFailed", new IOException());
-            }
-        });*/
     }
 }
 

@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
 public class Description {
-    //TODO:9.05.18 Content null dönmesi sorunu Moshiden GSON a geçince düzeldi sanırım Moshi de nested objeler için custom adapter kullanmak gerekiyor veya retrofitin GSON converter factorysi yerine başka bir factory kullanmak gerek?
+    //9.05.18 Content null dönmesi sorunu Moshiden GSON a geçince düzeldi sanırım Moshi de nested objeler için custom adapter kullanmak gerekiyor veya retrofitin GSON converter factorysi yerine başka bir factory kullanmak gerek?
     @SerializedName("_content")
     private String content;
 

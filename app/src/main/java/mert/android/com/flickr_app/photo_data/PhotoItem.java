@@ -103,6 +103,19 @@ public class PhotoItem implements Parcelable {
     }
 
     public String getUrl() {
-        // TODO: 11.05.2018 Picasso buna cevirebilirsin
+        //  11.05.2018 Picasso buna cevirebilirsin
+        StringBuilder builder = new StringBuilder();
+        builder.append("https://farm")
+                .append(farm)
+                .append(".staticflickr.com/")
+                .append(server)
+                .append("/")
+                .append(id)
+                .append("_")
+                .append(secret)
+                .append("_")
+                .append("m")
+                .append(".jpg");
+        return builder.toString();
     }
 }

@@ -9,7 +9,7 @@
 
         <variable
             name="onClickListener"
-            type="mert.android.com.flickr_app.RecyclerViewAdapter.recyclerOnClickListener" />
+            type="mert.android.com.flickr_app.interestinglist.DataViewAdapter.RecyclerOnClickListener" />
 
     </data>
 

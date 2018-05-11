@@ -9,58 +9,56 @@ import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
 public class Profile implements Parcelable {
-    private String[] mDetails;
+    Parcelable.Creator<Profile> CREATOR = new Creator<Profile>() {
+        @Override
+        public Profile createFromParcel(Parcel source) {
+            return new Profile(source);
+        }
 
+        @Override
+        public Profile[] newArray(int size) {
+            return new Profile[size];
+        }
+    };
+    private String[] mDetails;
     @SerializedName("country")
     private String country;
-
     @SerializedName("hometown")
     private String hometown;
-
     @SerializedName("occupation")
     private String occupation;
-
     @SerializedName("city")
     private String city;
-
     @SerializedName("join_date")
     private String joinDate;
-
     @SerializedName("facebook")
     private String facebook;
-
     @SerializedName("last_name")
     private String lastName;
-
     @SerializedName("tumblr")
     private String tumblr;
-
     @SerializedName("pinterest")
     private String pinterest;
-
     @SerializedName("instagram")
     private String instagram;
-
     @SerializedName("profile_description")
     private String profileDescription;
-
     @SerializedName("twitter")
     private String twitter;
-
     @SerializedName("nsid")
     private String nsid;
-
     @SerializedName("showcase_set")
     private String showcaseSet;
-
     @SerializedName("showcase_set_title")
     private String showcaseSetTitle;
-
     @SerializedName("id")
     private String id;
-
     @SerializedName("first_name")
     private String firstName;
+
+    public Profile(Parcel in) {
+
+    }
 
     public String getCountry() {
         return country;
@@ -68,6 +66,10 @@ public class Profile implements Parcelable {
 
     public String getHometown() {
         return hometown;
+    }
+
+    public void setHometown(String hometown) {
+        this.hometown = hometown;
     }
 
     public String getOccupation() {
@@ -90,6 +92,10 @@ public class Profile implements Parcelable {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getTumblr() {
         return tumblr;
     }
@@ -104,6 +110,10 @@ public class Profile implements Parcelable {
 
     public String getProfileDescription() {
         return profileDescription;
+    }
+
+    public void setProfileDescription(String profileDescription) {
+        this.profileDescription = profileDescription;
     }
 
     public String getTwitter() {
@@ -128,6 +138,10 @@ public class Profile implements Parcelable {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String[] getmDetails() {
@@ -157,22 +171,6 @@ public class Profile implements Parcelable {
         this.mDetails[2] = profDescription;
     }
 
-    public void setHometown(String hometown) {
-        this.hometown = hometown;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setProfileDescription(String profileDescription) {
-        this.profileDescription = profileDescription;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -184,20 +182,4 @@ public class Profile implements Parcelable {
 
 
     }
-
-    public Profile(Parcel in) {
-
-    }
-
-    Parcelable.Creator<Profile> CREATOR = new Creator<Profile>() {
-        @Override
-        public Profile createFromParcel(Parcel source) {
-            return new Profile(source);
-        }
-
-        @Override
-        public Profile[] newArray(int size) {
-            return new Profile[size];
-        }
-    };
 }

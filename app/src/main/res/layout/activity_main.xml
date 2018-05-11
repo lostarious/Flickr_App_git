@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="mert.android.com.flickr_app.MainActivity">
+    tools:context="mert.android.com.flickr_app.home.MainActivity">
 
     <data>
 

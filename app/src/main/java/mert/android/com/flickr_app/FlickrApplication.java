@@ -10,8 +10,8 @@ import android.app.Application;
 public class FlickrApplication extends Application {
 
 
-    // TODO: 11.05.2018 Manifeste tanimla.
-    // TODO: 11.05.2018 Folder structure'a acViewModel projesinden bak
+    // 11.05.2018 Manifeste tanimla.
+    //  11.05.2018 Folder structure'a acViewModel projesinden bak
     // TODO: 11.05.2018 Pushtan once ./gradlew clean build
     @Override
     public void onCreate() {
