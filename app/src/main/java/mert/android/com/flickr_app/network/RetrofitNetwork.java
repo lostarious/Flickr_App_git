@@ -1,21 +1,18 @@
-package mert.android.com.flickr_app.Network;
+package mert.android.com.flickr_app.network;
 
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.transition.Explode;
-import android.transition.Slide;
 import android.util.Log;
 
 import java.io.IOException;
 
 import mert.android.com.flickr_app.InterestingListFragment;
-import mert.android.com.flickr_app.ItemDetailsFragment;
 import mert.android.com.flickr_app.R;
 import mert.android.com.flickr_app.photo_data.PhotoItem;
 import mert.android.com.flickr_app.photo_data.Photos;
 import mert.android.com.flickr_app.photo_data.Re;
-import mert.android.com.flickr_app.user_data.Profile;
 import mert.android.com.flickr_app.user_data.ProfileResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +50,8 @@ public class RetrofitNetwork {
         return retrofit.create(FlickrClient.class);
     }
 
+
+    // TODO: 11.05.2018 transaction burada yapilmayacak
     public void requestFavoritesList(final FragmentTransaction fragmentTransaction) {
         mClient.favoritesList(API_KEY, EXTRAS).enqueue(new Callback<Re>() {
             @Override
@@ -81,8 +80,12 @@ public class RetrofitNetwork {
         });
     }
 
-    public void requestUserInfo(final FragmentTransaction fragmentTransaction, final PhotoItem clickedItem) {
-        mClient.userInfo(API_KEY, clickedItem.getOwner()).enqueue(new Callback<ProfileResponse>() {
+    // TODO: 11.05.2018 sadece parametreleri gonder.
+    public Call<ProfileResponse> requestUserInfo(final FragmentTransaction fragmentTransaction, final PhotoItem clickedItem) {
+
+        return mClient.userInfo(API_KEY, clickedItem.getId());
+
+        /*mClient.userInfo(API_KEY, clickedItem.getOwner()).enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, retrofit2.Response<ProfileResponse> response) {
                 Log.i("info", "onResponse: client Connected");
@@ -103,7 +106,7 @@ public class RetrofitNetwork {
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
                 Log.e("error", "userInfoMethodFailed", new IOException());
             }
-        });
+        });*/
     }
 }
 

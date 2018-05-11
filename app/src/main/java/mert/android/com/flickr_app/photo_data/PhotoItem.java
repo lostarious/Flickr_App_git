@@ -40,6 +40,8 @@ public class PhotoItem implements Parcelable {
     @SerializedName("isfamily")
     private int isfamily;
 
+    private String url;
+
     public PhotoItem(Parcel in) {
         //TODO(4) şuan sadece işe yaran kısımlar parcel olarak yazılıp okunuyor
         String[] data = new String[3];
@@ -98,5 +100,9 @@ public class PhotoItem implements Parcelable {
 
     public int getIsfamily() {
         return isfamily;
+    }
+
+    public String getUrl() {
+        // TODO: 11.05.2018 Picasso buna cevirebilirsin
     }
 }

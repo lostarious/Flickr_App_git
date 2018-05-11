@@ -2,15 +2,20 @@ package mert.android.com.flickr_app;
 
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import mert.android.com.flickr_app.Network.RetrofitNetwork;
+import mert.android.com.flickr_app.network.RetrofitNetwork;
 import mert.android.com.flickr_app.photo_data.PhotoItem;
+import mert.android.com.flickr_app.user_data.ProfileResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.recyclerOnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     // 3.05.2018 Bunlari da bir asagidaki to do da belirledigim classin icinde tanimlayabilirsin.
     FragmentManager fragmentManager = getSupportFragmentManager();
@@ -32,16 +37,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
 
     }
 
-    //interface override
-    @Override
-    public void itemClicked(PhotoItem clickedItem) {
-        //TODO: 8.05.2018 Bu kullanım doğru mu?
 
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        mRetrofitNetwork.requestUserInfo(fragmentTransaction, clickedItem);
+    // TODO: 11.05.2018 random parametre verdim. acViewModel projesinde var
+    public void replaceFragment(Fragment fragment){
 
     }
-    // 3.05.2018 Bunlar detail fragmentin viewlari. Activity'nin bunlara ulasmamasi gerekiyor. Burada daha farkli bir yapi kurmamiz lazim. Ben gosteririm sana.
+
+    // TODO: 11.05.2018 detaya giderken bu tetiklenecek. Detaya tasimak istedigin parametreleri newInstance metoduna gec ve oradan bundle'a ekleyip onCreateView'da? al
+    public void addFragment(Fragment fragment, String TAG){
+
+    }
+
 
 
 }

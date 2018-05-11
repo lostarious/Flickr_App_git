@@ -1,4 +1,4 @@
-package mert.android.com.flickr_app.Network;
+package mert.android.com.flickr_app.network;
 
 import mert.android.com.flickr_app.photo_data.Re;
 import mert.android.com.flickr_app.user_data.ProfileResponse;

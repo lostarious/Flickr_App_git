@@ -18,9 +18,8 @@ import mert.android.com.flickr_app.photo_data.Photos;
  * All rights reserved.
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    Photos mDataset;
-    recyclerOnClickListener listener;
-    ;
+    private Photos mDataset;
+    private recyclerOnClickListener listener;
 
     //veri almayı vermeyi fragment idare edecegi için listeneri oradan al
     public RecyclerViewAdapter(Photos mDataset, recyclerOnClickListener listener) {
@@ -66,6 +65,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         // 2. yontem ise DataBinding ile interesting_list_item'in icine
         // PhotoItem'i variable olarak tanimlayip burada sadece binding.setPhoto(...) yapacaksin
         //TODO(10) Onclicklisteneri databinding kısmına nasıl gömebilirim?
+        //TODO(10) Cevap - Lambda expression + acViewModel
+
+
         holder.mBinding.ivPlaceHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,10 +99,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     //onclicklistener interface oluştur
+    // TODO: 11.05.2018 interface, class isimleri buyuk harfle baslat
     public interface recyclerOnClickListener {
         void itemClicked(PhotoItem clickedItem);
     }
 
+    // TODO: 11.05.2018 Generic isim problemi
+    // TODO: 11.05.2018 Farkli bir folderin altinda tanimlayalim
     public class ViewHolder extends RecyclerView.ViewHolder {
         //her VH nin kendi bindingi olacağı için member
         InterestingListItemBinding mBinding;

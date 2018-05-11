@@ -20,10 +20,26 @@ import mert.android.com.flickr_app.user_data.Profile;
 public class ItemDetailsFragment extends Fragment {
     FragmentItemDetailsBinding mBinding;
 
+    public static ItemDetailsFragment newInstance(PhotoItem item) {
+
+        Bundle args = new Bundle();
+
+        ItemDetailsFragment.item = item;
+        args.putParcelable("...", item)
+
+        ItemDetailsFragment fragment = new ItemDetailsFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_item_details, container, false);
+
+        PhotoItem item = (PhotoItem) savedInstanceState.getParcelable("...");
+
+        // TODO: 11.05.2018 onstartta yapilanlari buraya tasi
         return mBinding.getRoot();
     }
 
