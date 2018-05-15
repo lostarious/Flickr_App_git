@@ -15,18 +15,20 @@ public class MainActivity extends AppCompatActivity {
 
     // 3.05.2018 Bunlari da bir asagidaki to do da belirledigim classin icinde tanimlayabilirsin.
     RetrofitNetwork mRetrofitNetwork = new RetrofitNetwork();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //3.05.2018 Retrofit objesini baska bir class'da olusturup oradan ulasman gerekiyor. Bu activity'nin lifecycle'i her yenilendiginde gereksiz yere objec olusturmus olacaksin.
-        mRetrofitNetwork.createClient(mRetrofitNetwork.createRetrofitInstance());
         super.onCreate(savedInstanceState);
+        //3.05.2018 Retrofit objesini baska bir class'da olusturup oradan ulasman gerekiyor. Bu activity'nin lifecycle'i her yenilendiginde gereksiz yere objec olusturmus olacaksin.
         setContentView(R.layout.activity_main);
-        addFragment(InterestingListFragment.newInstance(), InterestingListFragment.TAG);
-        //3.05.2018 Main Activityde sadece fragmentlarin gorunumunu saglayacak frame lgitayout'a ihtiyacin var. DataBinding'de tanimli olan PhotoItem'i silebilirsin.
+        //BUGFIX: Portre-landscape arası gider gelirken liste fragmenti üstüne yeni birtane oluşturmamak için
+        if(savedInstanceState==null) {
+            addFragment(InterestingListFragment.newInstance(), InterestingListFragment.TAG);
+            //3.05.2018 Main Activityde sadece fragmentlarin gorunumunu saglayacak frame lgitayout'a ihtiyacin var. DataBinding'de tanimli olan PhotoItem'i silebilirsin.
+        }
 
 
     }
+
 
 
     // 11.05.2018 random parametre verdim. acViewModel projesinde var
