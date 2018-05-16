@@ -3,6 +3,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="displayedItem"
             type="mert.android.com.flickr_app.photo_data.PhotoItem" />
@@ -11,6 +13,8 @@
             name="onClickListener"
             type="mert.android.com.flickr_app.interestinglist.DataViewAdapter.RecyclerOnClickListener" />
 
+
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:onClick="@{(v) -> onClickListener.itemClicked(displayedItem)}"
         android:orientation="vertical">
 
         <ImageView

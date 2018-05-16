@@ -43,9 +43,9 @@ public class ItemDetailsFragment extends Fragment {
         mBinding.linearLayout.setVisibility(View.INVISIBLE);
         mBinding.pbLoading.setVisibility(View.VISIBLE);
         if (savedInstanceState != null) {
-            mBinding.setSelectedItem(((PhotoItem) savedInstanceState.getParcelable("selected_item")));
+            mBinding.setSelectedItem((savedInstanceState.getParcelable("selected_item")));
         } else {
-            mBinding.setSelectedItem((PhotoItem) getArguments().getParcelable("selected_item"));
+            mBinding.setSelectedItem(getArguments().getParcelable("selected_item"));
         }
 
         RetrofitNetwork.requestUserInfo(mBinding.getSelectedItem().getOwner()).enqueue(new Callback<ProfileResponse>() {

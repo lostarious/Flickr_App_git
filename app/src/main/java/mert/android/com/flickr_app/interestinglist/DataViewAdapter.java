@@ -34,6 +34,7 @@ public class DataViewAdapter extends BaseRecyclerAdapter<DataViewHolder, PhotoIt
         //binding objesi oluştur
         InterestingListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.interesting_list_item, parent, false);
         //bnding objesini viewholderin olarak return et
+        binding.setOnClickListener(listener);
         return new DataViewHolder(binding);
 
     }
@@ -41,26 +42,7 @@ public class DataViewAdapter extends BaseRecyclerAdapter<DataViewHolder, PhotoIt
     //View içini doldur
     @Override
     public void bindView(DataViewHolder holder, int position) {
-        holder.mBinding.setDisplayedItem(this.mDataSet.get(position));
-        //Picasso implementasyonu
-        ///imageview run edilmeden önce match_parent ile getWidth ve getHeight kullanamayacağımız için picassoyu böyle implemente et
-        holder.mBinding.ivPlaceHolder.post(() -> Picasso.get().load(holder.mBinding.getDisplayedItem().getUrl())
-                .resize(holder.mBinding.ivPlaceHolder.getWidth(), holder.mBinding.ivPlaceHolder.getHeight())
-                .into(holder.mBinding.ivPlaceHolder));
-
-        //DONE
-        //Oncelikle elinde view holder objesi var
-        // orada bu isi yapman gerekiyor.
-        // Oraya gectikten sonra ise; ilk yontem klasik olan,
-        // findViewById üzerinden viewlari tanimlayip, islem yapacaksin.
-        // 2. yontem ise DataBinding ile interesting_list_item'in icine
-        // PhotoItem'i variable olarak tanimlayip burada sadece binding.setPhoto(...) yapacaksin
-
-        // Onclicklisteneri databinding kısmına nasıl gömebilirim?
-        // Cevap - Lambda expression + acViewModel
-
-        //iv için onclicklsitener
-        holder.mBinding.ivPlaceHolder.setOnClickListener(v -> listener.itemClicked(holder.mBinding.getDisplayedItem()));
+        holder.setItem(mDataSet.get(position));
     }
 
 

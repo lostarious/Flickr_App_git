@@ -14,6 +14,7 @@ import mert.android.com.flickr_app.network.RetrofitNetwork;
 public class MainActivity extends AppCompatActivity {
 
     // 3.05.2018 Bunlari da bir asagidaki to do da belirledigim classin icinde tanimlayabilirsin.
+    // TODO: 16.05.2018 Application'da 1 kere initle
     RetrofitNetwork mRetrofitNetwork = new RetrofitNetwork();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // 11.05.2018 random parametre verdim. acViewModel projesinde var
+    // TODO: 16.05.2018 bu proje icin replace'e ihtiyac yok. Add yapilacak
     public void replaceFragment(Fragment fragment, String fragmentTag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fl_fragment_display, fragment)
